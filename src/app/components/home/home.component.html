@@ -1,0 +1,54 @@
+<div class="container main-container">
+  <h1>Video Youtube <small>Dross</small></h1>
+  <div class="card-columns" *ngIf="videos.length > 0">
+    <div class="card animated fadeIn fast" *ngFor="let video of videos">
+      <img class="card-img-top" [src]="video.thumbnails.high.url" [alt]="video.title">
+      <div class="card-body">
+        <h5 class="card-title">{{ video.title }}</h5>
+        <!-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
+        <button (click)="verVideo( video )"
+            type="button" name="" id="" class="btn btn-outline-primary btn-lg btn-block">Ver Video</button>
+      </div>
+    </div>
+  </div>
+
+    <button
+      (click)="cargarMas()"
+      type="button"
+      class="btn btn-outline-primary btn-block"
+    >Cargar más videos</button>
+
+</div>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+
+      <div class="modal-content" *ngIf="videoSel" >
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{videoSel?.title}}</h5>
+
+        </div>
+        <div class="modal-body">
+
+            <iframe
+              width="100%"
+              height="300"
+              [src]="videoSel.resourceId.videoId | VideoYoutube"
+              frameborder="0"
+              allowfullscreen
+            ></iframe>
+
+            <br>
+            <p class="text-justify">
+               {{videoSel?.description | slice:0:250 }} ...
+            </p>
+        </div>
+        <div class="modal-footer">
+          <button (click)="cerrarVideo()"
+              type="button" class="btn btn-outline-danger btn-block">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
